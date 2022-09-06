@@ -15,7 +15,7 @@ Install the project dependencies:
 npm install
 ```
 
-Create the .env file in the project directory with the below file structure:
+Create the .env file inside project directory with the below file structure:
 ```md
 DB_NAME=''
 DB_PASSWORD=''
