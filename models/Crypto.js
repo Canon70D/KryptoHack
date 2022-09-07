@@ -1,18 +1,18 @@
-const { Model, DataTpyes } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class Crypto extends Model {}
 
-postMessage.init({
+Crypto.init({
   id: {
-    type: DataTpyes.INTEGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true,
   },
 
   name: {
-    type: DataTpyes.STRING,
+    type: DataTypes.STRING,
     allowNull: false,
   },
 
