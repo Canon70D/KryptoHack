@@ -7,33 +7,37 @@ const sequelize = require("../config/connection");
 
 class UserCrypto extends Model {}
 
-UserCrypto.init({
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    primaryKey: true,
-    autoIncrement: true,
-  },
+UserCrypto.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
 
-  user_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "user",
-      key: "id",
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+
+    crypto_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "crypto",
+        key: "id",
+      },
     },
   },
 
-  crypto_id: {
-    type: DataTypes.INTEGER,
-    references: {
-      model: "crypto",
-      key: "id",
-    },
-  },
-
-  sequelize,
-  timestamps: false,
-  freezeTableName: true,
-  underscored: true,
-  modelName: "usercrypto",
-});
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "usercrypto",
+  }
+);

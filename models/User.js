@@ -16,10 +16,12 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
+
     username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -28,6 +30,7 @@ User.init(
         isEmail: true,
       },
     },
+
     password: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -35,6 +38,7 @@ User.init(
         len: [8],
       },
     },
+
     //set up user profile img
     profile_img: {
       type: DataTypes.STRING,
@@ -43,6 +47,7 @@ User.init(
       },
     },
   },
+
   {
     hooks: {
       beforeCreate: async (newUserData) => {
@@ -58,6 +63,7 @@ User.init(
         );
       },
     },
+
     sequelize,
     timestamps: false,
     freezeTableName: true,
