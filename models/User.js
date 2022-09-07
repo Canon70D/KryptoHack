@@ -35,6 +35,7 @@ User.init(
         len: [8],
       },
     },
+    //set up user profile img
     profile_img: {
       type: DataTypes.STRING,
       validate: {
@@ -49,6 +50,7 @@ User.init(
         return newUserData;
       },
 
+      //incase we want user to update password
       beforeUpdate: async (updateUserData) => {
         updateUserData.password = await bcrypt.hash(
           updateUserData.password,
