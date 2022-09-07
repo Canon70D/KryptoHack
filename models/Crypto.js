@@ -16,6 +16,22 @@ Crypto.init({
     allowNull: false,
   },
 
+  price: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+    validate: {
+      isDecimal: true,
+    },
+  },
+
+  day_volume: {
+    type: DataTypes.DECIMAL,
+    allowNull: false,
+    validate: {
+      isDecimal: true,
+    },
+  },
+
   sequelize,
   timestamps: false,
   freezeTableName: true,
