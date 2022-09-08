@@ -40,6 +40,11 @@ Crypto.init(
         isDecimal: true,
       },
     },
+
+    isFavourite: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: fals,
+    },
   },
 
   {
