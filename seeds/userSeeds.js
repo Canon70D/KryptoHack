@@ -13,7 +13,7 @@ function createTestUser() {
 }
 
 Array.from({ length: 10 }).forEach(() => {
-  userArray.push(createTestUser);
+  userArray.push(createTestUser());
 });
 
 const userSeeds = () => User.bulkCreate(userArray, { individualHooks: true });
