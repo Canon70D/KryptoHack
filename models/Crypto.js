@@ -43,7 +43,7 @@ Crypto.init(
 
     isFavourite: {
       type: DataTypes.BOOLEAN,
-      defaultValue: fals,
+      defaultValue: false,
     },
   },
 
