@@ -32,6 +32,14 @@ Crypto.init(
         isDecimal: true,
       },
     },
+
+    marketcap: {
+      type: DataTypes.DECIMAL,
+      allowNull: false,
+      validate: {
+        isDecimal: true,
+      },
+    },
   },
 
   {
