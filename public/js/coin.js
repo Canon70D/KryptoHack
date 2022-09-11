@@ -1,26 +1,36 @@
-const coin = async () => {
-    const response = await fetch('https://api.coingecko.com/api/v3/ping', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    });
+// // get coin list to fetch all the possible coins
+// const { CoinList } = require('../../models');
+
+// // Get current data for an individual coin
+// // This only supports symbol for MVP (exp: symbol=BTC (and not bitcoin))
+// const coin = async (coinSymbol) => {
+
+//   // find the id for the coin symbol that user chose
+//   const coinData = await CoinList.findOne({ where: { symbol: coinSymbol } });
+
+//   if (!coinData) {
+//     res
+//       .status(400)
+//       .json({ message: 'No such a coin' });
+//     return;
+//   } else {
+//     console.log(coinData);
+//   }
+
   
-    if (response.ok) {
-      console.log(response);
-    } else {
-      alert(response.statusText);
-    }
-  };
-  
-  document.querySelector('.coinTest').addEventListener('click', coin);
 
-// //1. Import coingecko-api
-// const CoinGecko = require('coingecko-api');
 
-// //2. Initiate the CoinGecko API Client
-// const CoinGeckoClient = new CoinGecko();
+//   const response = await fetch('https://api.coingecko.com/api/v3/ping', {
+//     method: 'GET',
+//     headers: { 'Content-Type': 'application/json' },
+//   });
 
-// //3. Make calls
-// var func = async() => {
-//   let data = await CoinGeckoClient.ping();
+//   if (response.ok) {
+//     console.log(response);
+//   } else {
+//     alert(response.statusText);
+//   }
 // };
+
+// document.querySelector('.coinTest').addEventListener('click', coin);
 
