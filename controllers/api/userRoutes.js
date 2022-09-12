@@ -17,7 +17,7 @@ router.get('/profile/:id', async (req, res) => {
     const userProfile = await User.findByPk(req.params.id);
     const user = userProfile.map((project) => project.get({ plain: true }));
 
-    
+    res.render('profile', user)
 
   } catch (error) {
     res.status(500).json(error)
