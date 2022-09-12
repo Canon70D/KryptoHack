@@ -5,7 +5,10 @@ const { Crypto } = require('../../models');
 router.get('/', async (req, res) => {
     try {
         const cryptoData = await Crypto.findAll()
-        res.status(200).json(cryptoData)
+        const cryptos = cryptoData.map((project) => project.get({ plain: true }));
+        res.render('homepage', {cryptos})
+
+        // res.status(200).json(cryptos)
     } catch(error) {
         res.status(500).json(error)
     }

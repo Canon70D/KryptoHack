@@ -5,7 +5,9 @@ const withAuth = require("../utils/auth");
 router.get("/", withAuth, async (req, res) => {
   try {
     const cryptoData = await Crypto.findAll({
+
       // attributes: { exclude: ['password'] },
+
       order: [["id", "ASC"]],
     });
 

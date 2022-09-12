@@ -2,7 +2,9 @@ const router = require('express').Router();
 const { Crypto } = require('../../models');
 
 
-// GET ALL AND ADD IN THE 'WHERE: isFavourite: true'
+// GET the list of selected favourites, if none then response with none selected
+// ADD IN THE HANDLEBARS RENDER PAGE OF FAVOURITES LIST
+// get list needs to be connected through the user ID to how many coins they have
 router.get('/', async (req, res) => {
     try {
         const cryptoData = await Crypto.findAll({
@@ -11,11 +13,16 @@ router.get('/', async (req, res) => {
             }
         })
 
+        const favourites = cryptoData.map((project) => project.get({ plain: true }));
+        // IF NO FAVOURITE SELECTED THEN CAN BE REDIRECTED BACK TO LIST OF CRYPTO
         if(cryptoData.length === 0) {
-            res.status(404).json({ message: 'You have no favourites selected. '});
+            res.render('favourites').json({ message: 'You have no favourites selected. '});
             return;
         } else {
-            res.status(200).json(cryptoData)
+            res.render('favourites', {
+                favourites,
+                logged_in: req.session.logged_in
+            });
             return;
         }
     } catch(error) {
