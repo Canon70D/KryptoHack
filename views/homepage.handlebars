@@ -1,13 +1,13 @@
-{{#each users as |user| }}
-<div class="row align-center mb-5">
-  <div class="col-md-6">
-    <h2>{{{get_emoji}}} {{username}}</h2>
+<h1>Test title</h1>
+
+{{#each cryptos as |crypto|}}
+  <div class="row align-center mb-5">
+    <tr>
+      <td>{{crypto.id}} </td>
+      <td>{{crypto.name}} </td>
+      <td>{{crypto.price}}</td>
+      <td>{{crypto.day_volume}}</td>
+      <td>{{crypto.marketcap}}</td>
+    </tr>
   </div>
-  <div class="col-md-6">
-    <h3><a href="mailto:{{user.email}}">{{user.email}}</a></h3>
-  </div>
-</div>
 {{/each}}
-<div class="coinTest">
-Hey
-</div>

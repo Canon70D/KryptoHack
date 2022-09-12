@@ -26,7 +26,7 @@ Crypto.init(
     },
 
     day_volume: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         isDecimal: true,
@@ -34,7 +34,7 @@ Crypto.init(
     },
 
     marketcap: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.BIGINT,
       allowNull: false,
       validate: {
         isDecimal: true,

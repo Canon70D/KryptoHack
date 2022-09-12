@@ -1,18 +1,17 @@
-const router = require('express').Router();
-const { User } = require('../models');
-const withAuth = require('../utils/auth');
+const router = require("express").Router();
+const { Crypto } = require("../models");
+const withAuth = require("../utils/auth");
 
-router.get('/', withAuth, async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
-    const userData = await User.findAll({
-      attributes: { exclude: ['password'] },
-      order: [['username', 'ASC']],
+    const cryptoData = await Crypto.findAll({
+      order: [["id", "ASC"]],
     });
 
-    const users = userData.map((project) => project.get({ plain: true }));
+    const cryptos = cryptoData.map((project) => project.get({ plain: true }));
 
-    res.render('homepage', {
-      users,
+    res.render("homepage", {
+      cryptos,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -20,13 +19,13 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get("/login", (req, res) => {
   if (req.session.logged_in) {
-    res.redirect('/');
+    res.redirect("/");
     return;
   }
 
-  res.render('login');
+  res.render("login");
 });
 
 module.exports = router;
