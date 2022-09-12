@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Bitcoin",
+        "price": "21600",
+        "day_volume": "1000000",
+        "marketcap": "416000000",
+        "isFavourite": "false"
+    },
+    {
+        "name": "Ethereum",
+        "price": "1600",
+        "day_volume": "500000",
+        "marketcap": "216000000",
+        "isFavourite": "false"
+    },
+    {
+        "name": "Binance",
+        "price": "400",
+        "day_volume": "20000",
+        "marketcap": "6000000",
+        "isFavourite": "false"
+    },
+    {
+        "name": "Cardano",
+        "price": "0.5",
+        "day_volume": "9000",
+        "marketcap": "2100000",
+        "isFavourite": "false"
+    }
+]

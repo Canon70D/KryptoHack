@@ -1,6 +1,52 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+router.get('/', async (req, res) => {
+  try {
+    const userData = await User.findAll();
+
+    res.status(200).json(userData);
+  } catch(error) {
+    res.status(500).json(error)
+  }
+});
+
+// Account creation
+router.post('/signup', async (req, res) => {
+  try {
+    const newUser = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password
+    })
+    res.status(200).json(newUser)
+
+  } catch(error) {
+    res.status(500).json(error)
+  }
+})
+
+// Account deletion
+router.delete('/:id', async (req, res) => {
+  try {
+    const deleteData = await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    });
+
+    if(!deleteData) {
+      res.status(404).json({ message: 'Could not delete.' });
+      return;
+    }
+
+    res.status(200).json(deleteData)
+  } catch(error) {
+    res.status(500).json(error)
+  }
+})
+
+
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });

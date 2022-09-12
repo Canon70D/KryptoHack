@@ -3,7 +3,7 @@ const { Comment } = require("../models");
 
 const commentArray = [];
 
-function creatTestComment() {
+function createTestComment() {
   return {
     comment_text: faker.random.words(15),
     user_id: faker.datatype.number({ min: 1, max: 10 }),
@@ -12,7 +12,7 @@ function creatTestComment() {
 }
 
 Array.from({ length: 10 }).forEach(() => {
-  commentArray.push(creatTestComment());
+  commentArray.push(createTestComment());
 });
 
 const commentSeeds = () => Comment.bulkCreate(commentArray);

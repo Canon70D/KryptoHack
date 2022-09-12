@@ -1,5 +1,7 @@
+// Import express router
 const router = require('express').Router();
 
+// Create API paths
 const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
 

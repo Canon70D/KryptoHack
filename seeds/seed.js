@@ -22,7 +22,7 @@ const seedDatabase = async () => {
 
   // await sequelize.sync({ fource: true });
 
-  // console.log("-----------database seed-----------");
+  console.log("-----------database seed-----------");
   // await userSeeds();
   // console.log("-----------users seeded----------");
 };
