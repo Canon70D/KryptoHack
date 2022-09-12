@@ -2,6 +2,7 @@ const User = require("./User");
 const Comment = require("./Comment");
 const Crypto = require("./Crypto");
 const UserCrypto = require("./UserCrypto");
+const CoinList = require("./CoinList")
 
 //user to comment associations
 User.hasMany(Comment, { foreignKey: "user_id", onDelete: "set null" });
@@ -22,4 +23,4 @@ Crypto.belongsToMany(User, {
   foreignKey: "crypto_id",
 });
 
-module.exports = { User, Comment, Crypto, UserCrypto };
+module.exports = { User, Comment, Crypto, UserCrypto, CoinList };
