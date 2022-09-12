@@ -41,3 +41,5 @@ UserCrypto.init(
     modelName: "usercrypto",
   }
 );
+
+module.exports = UserCrypto;
