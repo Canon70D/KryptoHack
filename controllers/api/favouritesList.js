@@ -12,12 +12,17 @@ router.get('/', async (req, res) => {
                 isFavourite: true
             }
         })
+
+        const favourites = cryptoData.map((project) => project.get({ plain: true }));
         // IF NO FAVOURITE SELECTED THEN CAN BE REDIRECTED BACK TO LIST OF CRYPTO
         if(cryptoData.length === 0) {
-            res.status(404).json({ message: 'You have no favourites selected. '});
+            res.render('favourites').json({ message: 'You have no favourites selected. '});
             return;
         } else {
-            res.status(200).json(cryptoData)
+            res.render('favourites', {
+                favourites,
+                logged_in: req.session.logged_in
+            });
             return;
         }
     } catch(error) {

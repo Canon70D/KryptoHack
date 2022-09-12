@@ -13,9 +13,9 @@
 }
 
 .title-word-1 {
-  --color-1: #f55702;
-  --color-2: #0283ba;
-  --color-3: #000000;
+  --color-1: #df8453;
+  --color-2: #3d8dae;
+  --color-3: #31ad12;
 }
 
 @keyframes color-animation {
@@ -69,7 +69,7 @@
   margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
-  font-size: 13px;
+  font-size: 10px;
 }
 
 .form button {
@@ -137,26 +137,67 @@
 }
 
 /* LINKS */
+
 ul {
-  padding: 0px;
+  padding: 1px;
   display: flex;
   justify-content: center;
   font-family: "Actor";
-  text-transform: uppercase;
-  margin: auto;
 }
 
 ul li {
   list-style: none;
-  padding: 0px 10%;
-  background-color: #797979;
+  padding: 0px 5%;
 }
 
 ul li a {
   text-decoration: none;
   font-size: 15px;
-  color: white;
+  color: rgb(126, 126, 126);
   text-align: center;
   position: relative;
-  background-color: #797979;
+}
+
+ul li a::before {
+  content: "";
+  width: 10px;
+  border-radius: 1px;
+  height: 5px;
+  background: #4caf50;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transition: 0.4s;
+}
+ul li:hover a::before {
+  width: 50%;
+  transform: translateX(90%);
+}
+ul li a::after {
+  content: "";
+  width: 10px;
+  border-radius: 1px;
+  height: 5px;
+  background: #4caf50;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  transition: 0.4s;
+}
+ul li:hover a::after {
+  width: 50%;
+  transform: translateX(10%);
+}
+
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc_disabled:after,
+table.dataTable thead .sorting_asc_disabled:before,
+table.dataTable thead .sorting_desc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc_disabled:after,
+table.dataTable thead .sorting_desc_disabled:before {
+  bottom: 0.5em;
 }

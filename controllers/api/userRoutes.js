@@ -12,6 +12,16 @@ router.get('/', async (req, res) => {
 });
 
 // ADD IN A GET SINGULAR USER ACCOUNT FOR THE PROFILE AND RENDER THE PROFILE PAGE
+router.get('/profile/:id', async (req, res) => {
+  try {
+    const userProfile = await User.findByPk(req.params.id);
+    const user = userProfile.map((project) => project.get({ plain: true }));
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
+
 // Get to signup page
 router.get('/signup', async (req, res) => {
   try {
