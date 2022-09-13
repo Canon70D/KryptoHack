@@ -5,6 +5,8 @@ const { Crypto } = require('../../models');
 // GET the list of selected favourites, if none then response with none selected
 // ADD IN THE HANDLEBARS RENDER PAGE OF FAVOURITES LIST
 // get list needs to be connected through the user ID to how many coins they have
+// / get the favourites
+// use user id from session in the request search for in user forOne, and that will then draw from the favourites table the coins that are linked to that
 router.get('/', async (req, res) => {
     try {
         
