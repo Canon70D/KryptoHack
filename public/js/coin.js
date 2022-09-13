@@ -1,36 +1,49 @@
-// // get coin list to fetch all the possible coins
-// const { CoinList } = require('../../models');
-
-// // Get current data for an individual coin
-// // This only supports symbol for MVP (exp: symbol=BTC (and not bitcoin))
-// const coin = async (coinSymbol) => {
-
-//   // find the id for the coin symbol that user chose
-//   const coinData = await CoinList.findOne({ where: { symbol: coinSymbol } });
-
-//   if (!coinData) {
-//     res
-//       .status(400)
-//       .json({ message: 'No such a coin' });
-//     return;
-//   } else {
-//     console.log(coinData);
-//   }
-
-  
+// API routes:
+// Get only the latest coins and their data
+const coinLatestRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=e3efea13-b74b-49bc-9eec-95f5d0473a69`;
+// Get information for a single coin by providing its id
+const coinSingleRoute = `https://api.coingecko.com/api/v3/coins/`;
 
 
-//   const response = await fetch('https://api.coingecko.com/api/v3/ping', {
-//     method: 'GET',
-//     headers: { 'Content-Type': 'application/json' },
-//   });
+// Get only the latest coin
+const coinLatest = async () => {
+    const response = await fetch(coinLatestRoute, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    if (response.ok) {
+        const json = await response.json();
+        let data = json.data
+        console.log(data);
+        return data;
+    } else {
+        alert('The action could not be completed. Please try again later.');
+    }
+}
 
-//   if (response.ok) {
-//     console.log(response);
-//   } else {
-//     alert(response.statusText);
-//   }
-// };
 
-// document.querySelector('.coinTest').addEventListener('click', coin);
+// Get all the info for one coin
+const coinSingle = async (id) => {
+    const response = await fetch(`${coinSingleRoute}${id}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    })
+    if (response.ok) {
+        const json = await response.json();
+        console.log(json);
+        return json;
+    } else {
+        alert('The action could not be completed. Please try again later.');
+    }
+}
+
+
+// Testing
+// document.querySelector('.coinTest').addEventListener('click', coinLatest);
+// document.querySelector('.coinTest').addEventListener('click', function () { coinSingle("ethereum") });
+
 

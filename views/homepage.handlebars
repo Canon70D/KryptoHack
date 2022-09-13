@@ -1,43 +1,37 @@
-{{#each cryptos as |crypto|}}
-
-  <div id="wrap">
-    <div class="container">
-      <table
-        cellpadding="0"
-        cellspacing="0"
-        border="0"
-        class="datatable table table-striped table-bordered"
-      >
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>PRICE</th>
-            <th>DAY VOLUME</th>
-            <th>MARKET CAP</th>
-          </tr>
-        </thead>
-        <tr class="gradeA">
-          <td>{{crypto.id}}</td>
-          <td>{{crypto.name}}</td>
-          <td>{{crypto.price}}</td>
-          <td>{{crypto.day_volume}}</td>
-          <td>{{crypto.marketcap}}</td>
+<div id="wrap">
+  <div class="container">
+    <table cellpadding="0" cellspacing="0" border="0" class="datatable table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>PRICE (USD)</th>
+          <th>DAY VOLUME</th>
+          <th>MARKET CAP (24hr)</th>
         </tr>
-        <tbody>
+      </thead>
+      {{#each coinData as |data|}}
+      <tr class="gradeA">
+        <td>
+          <a href="/crptoProfile/{{data.id}}">{{data.name}}</a>
+        </td>
+        <td>{{data.quote.USD.price}}</td>
+        <td>{{data.quote.USD.volume_24h}}</td>
+        <td>{{data.quote.USD.market_cap}}</td>
+      </tr>
+      {{/each}}
+      <tbody>
 
-        </tbody>
-      </table>
-    </div>
+      </tbody>
+    </table>
   </div>
+</div>
 
-  {{!-- <div class="row align-center mb-5">
-    <tr>
-      <td>{{crypto.id}} </td>
-      <td>{{crypto.name}} </td>
-      <td>{{crypto.price}}</td>
-      <td>{{crypto.day_volume}}</td>
-      <td>{{crypto.marketcap}}</td>
-    </tr>
-  </div> --}}
-{{/each}}
+{{!-- <div class="row align-center mb-5">
+  <tr>
+    <td>{{crypto.id}} </td>
+    <td>{{crypto.name}} </td>
+    <td>{{crypto.price}}</td>
+    <td>{{crypto.day_volume}}</td>
+    <td>{{crypto.marketcap}}</td>
+  </tr>
+</div> --}}
