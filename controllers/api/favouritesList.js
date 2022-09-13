@@ -7,55 +7,26 @@ const { Crypto } = require('../../models');
 // get list needs to be connected through the user ID to how many coins they have
 router.get('/', async (req, res) => {
     try {
-        const cryptoData = await Crypto.findAll({
-            where: {
-                isFavourite: true
-            }
-        })
-
-        const favourites = cryptoData.map((project) => project.get({ plain: true }));
-        // IF NO FAVOURITE SELECTED THEN CAN BE REDIRECTED BACK TO LIST OF CRYPTO
-        if(cryptoData.length === 0) {
-            res.render('favourites').json({ message: 'You have no favourites selected. '});
-            return;
-        } else {
-            res.render('favourites', {
-                favourites,
-                logged_in: req.session.logged_in
-            });
-            return;
-        }
+        
     } catch(error) {
         res.status(500).json(error)
     }
 })
 
-//PUT to add/remove coins from favourites
-router.put('/:id', async (req, res) => {
+// POST to add coin to favourites
+// use the req.sesssions.user_id to get id findOne from User database and then add the req.params.id for crypto to be added to the favourites table
+router.post('/:id', async (req, res) => {
     try {
-        const updateCrypto = await Crypto.findByPk(req.params.id)
 
-        if(updateCrypto.isFavourite === true) {
-            const trueToFalse = await Crypto.update({
-                isFavourite: false
-            }, {
-                where: {
-                    id: updateCrypto.id
-                }
-            })
-            res.send({ message: 'Removed from favourites.'})
-            return;
-        } else {
-            const falseToTrue = await Crypto.update({
-                isFavourite: true
-            }, {
-                where: {
-                    id: updateCrypto.id
-                }
-            })
-            res.send({ message: 'Added to favourites.'})
-            return;
-        }
+    } catch(error) {
+        res.status(500).json(error)
+    }
+})
+
+//DELETE to remove from favourites
+router.delete('/:id', async (req, res) => {
+    try {
+        
     } catch(error) {
         res.status(500).json(error)
     }
