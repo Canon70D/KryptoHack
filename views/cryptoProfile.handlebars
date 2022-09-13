@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div class="btc-info">
+    <span class="btc-icon"></span>
+    <span class="btc-name h3"></span>
+  </div>
+
+  <div class="btc-main">
+    <div>{{coinData.name}}</div>
+    <div>Price (USD): {{coinData.quote.USD.price}}<span class="btc-usd"></span></div>
+    <div>1 hour change: {{coinData.quote.USD.percent_change_1h}}<span class="btc-change-1h"></span></div>
+    <div>1 day change: {{coinData.quote.USD.percent_change_24h}}<span class="btc-change-1d"></span></div>
+    <div>1 week change: {{coinData.quote.USD.percent_change_7d}}<span class="btc-change-1w"></span></div>
+  </div>
+
+  {{!-- <button type="button" class="btn btn-outline-success" id="refresh-btn">
+    Refresh data now
+  </button> --}}
+</div>
+<footer>
+</footer>

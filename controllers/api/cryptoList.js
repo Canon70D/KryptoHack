@@ -1,18 +1,22 @@
 const router = require('express').Router();
-const { Crypto } = require('../../models');
+const { Crypto, CoinList } = require('../../models');
 
-// GET all crypto
-router.get('/', async (req, res) => {
+
+// GET ID from coinList
+router.get('/coinList/:symbol', async (req, res) => {
     try {
-        const cryptoData = await Crypto.findAll()
-        const cryptos = cryptoData.map((project) => project.get({ plain: true }));
-        res.render('homepage', {cryptos})
-
-        // res.status(200).json(cryptos)
-    } catch(error) {
-        res.status(500).json(error)
+        const coinData = await CoinList.findAll({
+            where: {
+                symbol: req.params.symbol
+            },
+            attributes: ['coin_id', 'name'],
+        });
+        res.status(200).json(coinData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
     }
-})
+});
 
 // GET by name ASC
 
