@@ -47,36 +47,26 @@ router.get("/crptoProfile/:id", withAuth, async (req, res) => {
     }
 });
 
-// Single cryto profile
+// Single user profile
 router.get("/userProfile", withAuth, async (req, res) => {
-    // coinID = req.params.id
-    // console.log(coinID);
-    // const coinDetailedRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${coinID}&${coinAPIKey}`;
-    // console.log(coinDetailedRoute);
-    // try {
-    //     const response = await axios.get(coinDetailedRoute)
-    //     let responseData = await response.data
-    //     let coinData = (responseData.data)[coinID]
+    try {
+        const userID = req.session.user_id
+        
+        const user = await User.findOne({
+            where: { id: userID },
+            attributes: ['username', 'email'],
+        });
+        let userData = user.dataValues
 
-    console.log(req.session.user_id);
-    // const userData = await User.findByPk({
-    //     where: {
-    //         id: "1"
-    //     },
-    //     attributes: ['username', 'email', 'password'],
-    // });
-
-    // console.log(userData);
-
-    res.render("profile", {
-        // coinData ,
-        logged_in: req.session.logged_in,
-    });
-    // } catch (err) {
-    //     console.log(err);
-    //     res.status(500).json(err);
-    // }
-});
+        res.render("profile", {
+            userData,
+            logged_in: req.session.logged_in,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+})
 
 router.get("/login", (req, res) => {
     if (req.session.logged_in) {
