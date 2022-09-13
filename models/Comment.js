@@ -27,16 +27,11 @@ Comment.init(
         key: "id",
       },
     },
-
-    crypto_id: {
+    coin_id: {
       type: DataTypes.INTEGER,
-      references: {
-        model: "crypto",
-        key: "id",
-      },
+      allowNull: false,
     },
   },
-
   {
     sequelize,
     timestamps: false,

@@ -3,5 +3,10 @@
     "username": "Test",
     "email": "test@test.com",
     "password": "123456"
+  },
+  {
+    "username": "Test",
+    "email": "test2@test.com",
+    "password": "123"
   }
 ]
