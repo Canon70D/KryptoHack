@@ -2,7 +2,6 @@
 <html lang="en-us">
 <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href='https://fonts.googleapis.com/css?family=Actor' rel='stylesheet'>
@@ -12,16 +11,19 @@
     <title>CryptoHack</title>
 </head>
 
-<h2 class="title">
-  <span class="title-word title-word-1">KryptoHack</span>
-</h2>
- 
-<ul>
-  <li><a href="#">Home</a></li>
-  <li><a href="#">About</a></li>
-  <li><a href="#">Reviews</a></li>
-  <li><a href="#">Contact</a></li>
-</ul>
+<header>
+  <h1 data-text="KRYPTOHACK">KRYPTOHACK</h1>
+</header>
+
+<nav>
+	<a href="#">Home</a>
+	<a href="#">About</a>
+	<a href="#">Profile</a>
+	<a href="#">Favourites</a>
+	<a href="#">Data</a>
+	<div class="animation start-home"></div>
+</nav>
+
 
 <div class="login-page">
   <div class="form">
@@ -36,7 +38,9 @@
       <input type="text" placeholder="username"/>
       <input type="password" placeholder="password"/>
      <button>login</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
+     <div class="registered"> 
+     <p class="message">Not registered? <a href="#">Create an account</a></p>
+    </div>
     </form>
   </div>
 </div>
