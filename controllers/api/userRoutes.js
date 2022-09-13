@@ -12,13 +12,16 @@ router.get('/', async (req, res) => {
 });
 
 // ADD IN A GET SINGULAR USER ACCOUNT FOR THE PROFILE AND RENDER THE PROFILE PAGE
+// GET THE FAVOURITE LIST AS WELL 
 router.get('/profile/:id', async (req, res) => {
   try {
     const userProfile = await User.findByPk(req.params.id);
-    // const user = userProfile.map((project) => project.get({ plain: true }));
+    const user = userProfile.get({ plain: true });
 
-    // res.render('profile', user)
-    res.send(userProfile)
+    res.render('profile', {
+      user,
+      logged_in: req.session.logged_in
+    })
 
   } catch (error) {
     res.status(500).json(error)
@@ -70,7 +73,7 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
-
+// Login
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -112,6 +115,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Logout
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

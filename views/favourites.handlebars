@@ -1,0 +1,43 @@
+{{#each favourites as |favourite|}}
+
+  <div id="wrap">
+    <div class="container">
+      <table
+        cellpadding="0"
+        cellspacing="0"
+        border="0"
+        class="datatable table table-striped table-bordered"
+      >
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>NAME</th>
+            <th>PRICE</th>
+            <th>DAY VOLUME</th>
+            <th>MARKET CAP</th>
+          </tr>
+        </thead>
+        <tr class="gradeA">
+          <td>{{favourite.id}}</td>
+          <td>{{favourite.name}}</td>
+          <td>{{favourite.price}}</td>
+          <td>{{favourite.day_volume}}</td>
+          <td>{{favourite.marketcap}}</td>
+        </tr>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  {{!-- <div class="row align-center mb-5">
+    <tr>
+      <td>{{crypto.id}} </td>
+      <td>{{crypto.name}} </td>
+      <td>{{crypto.price}}</td>
+      <td>{{crypto.day_volume}}</td>
+      <td>{{crypto.marketcap}}</td>
+    </tr>
+  </div> --}}
+{{/each}}

@@ -1,8 +1,9 @@
 const sequelize = require("../config/connection");
 
-const { User, CoinList, Crypto } = require("../models");
+const { User, CoinList, Crypto, UserCrypto } = require("../models");
 const userData = require("./userData.json");
 const coinData = require("./cryptoSeed.json");
+const userCrypto = require('./userCryptoSeed.json')
 //const userSeeds = require("./userSeeds");
 
 const seedDatabase = async () => {
@@ -17,6 +18,11 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
+
+  // await UserCrypto.bulkCreate(userCrypto, {
+  //   individualHooks: true,
+  //   returning: true,
+  // })
 
   process.exit(0);
 
