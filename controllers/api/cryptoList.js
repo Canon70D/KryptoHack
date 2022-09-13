@@ -19,15 +19,16 @@ router.get('/coinList/:symbol', async (req, res) => {
 });
 
 // GET by name ASC
+// GET by name ASC
 router.get("/name/asc", async (req, res) => {
     try {
-        const cryptoData = await Crypto.findAll({
+        const cryptoData = await CoinList.findAll({
             order: [["name", "ASC"]],
     });
 
-        const cryptos = cryptoData.map((project) => project.get({ plain: true }));  
+        const coinData = cryptoData.map((project) => project.get({ plain: true }));  
         res.render("homepage", {
-            cryptos,
+            coinData,
             logged_in: req.session.logged_in,
         });
     } catch (err) {

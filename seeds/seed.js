@@ -3,10 +3,10 @@ const sequelize = require("../config/connection");
 const { User, CoinList } = require("../models");
 const userData = require("./userData.json");
 
-const coinListData = require("./coinListData.json");
+// const coinListData = require("./coinListData.json");
 // const cryptoData = require("./cryptoData.json");
 
-//const userSeeds = require("./userSeeds");
+const userSeeds = require("./userSeeds");
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
