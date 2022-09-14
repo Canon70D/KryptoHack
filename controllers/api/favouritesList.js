@@ -20,13 +20,6 @@ router.get('/', async (req, res) => {
         let coinData = []
         let coinDetailedRoute;
 
-        // coinDetailedRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${tempId}&${coinAPIKey}`;
-
-        // const response = await axios.get(coinDetailedRoute)
-        // let responseData = await response.data
-        // let data = (responseData.data)[tempId]
-        // coinData.push(data)
-
         for(let i = 0; i < ids.length; i++){
             let idNum = ids[i]
             coinDetailedRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${idNum}&${coinAPIKey}`;
@@ -71,10 +64,21 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+
+// NEED TO USE SESSIONS USER AGAIN TO FIND USER ID AND THEN USE THE PARAMS ID FOR WHICH ONE TO GET DELETED
 //DELETE to remove from favourites
-router.delete('/:id', async (req, res) => {
+router.get('/delete/:id', async (req, res) => {
     try {
-        
+        const userId = req.session.user_id
+        const cryptoId = req.params.id
+
+        const deleteFav = await Favourites.destroy({
+            where: {
+                coin_id: cryptoId
+            }
+        })
+
+        res.json(deleteFav)
     } catch(error) {
         res.status(500).json(error)
     }
