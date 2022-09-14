@@ -1,61 +1,84 @@
 const router = require('express').Router();
-const { Crypto } = require('../../models');
+const { User, Favourites} = require('../../models');
+const axios = require('axios');
+const coinAPIKey = "CMC_PRO_API_KEY=e3efea13-b74b-49bc-9eec-95f5d0473a69"
 
-
-// GET the list of selected favourites, if none then response with none selected
-// ADD IN THE HANDLEBARS RENDER PAGE OF FAVOURITES LIST
-// get list needs to be connected through the user ID to how many coins they have
+// GET the list of selected favourites
 router.get('/', async (req, res) => {
     try {
-        const cryptoData = await Crypto.findAll({
-            where: {
-                isFavourite: true
-            }
+        const userId = req.session.user_id
+        const user = await User.findOne({
+            where: { id: userId },
+            attributes: ['id'],
+            include: [{ model: Favourites}]
+        });
+        let coinIds = user.favourites
+        let ids = coinIds.map(coin => {
+            return coin.coin_id
         })
 
-        const favourites = cryptoData.map((project) => project.get({ plain: true }));
-        // IF NO FAVOURITE SELECTED THEN CAN BE REDIRECTED BACK TO LIST OF CRYPTO
-        if(cryptoData.length === 0) {
-            res.render('favourites').json({ message: 'You have no favourites selected. '});
-            return;
-        } else {
-            res.render('favourites', {
-                favourites,
-                logged_in: req.session.logged_in
-            });
-            return;
+        let coinData = []
+        let coinDetailedRoute;
+
+        for(let i = 0; i < ids.length; i++){
+            let idNum = ids[i]
+            coinDetailedRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${idNum}&${coinAPIKey}`;
+            const response = await axios.get(coinDetailedRoute)
+            let responseData = await response.data
+            let data = (responseData.data)[idNum]
+            coinData.push(data)
         }
+
+        res.render("favourites", {
+            coinData,
+            logged_in: req.session.logged_in,
+        });
+        // res.json(coinData)
     } catch(error) {
         res.status(500).json(error)
     }
 })
 
-//PUT to add/remove coins from favourites
-router.put('/:id', async (req, res) => {
-    try {
-        const updateCrypto = await Crypto.findByPk(req.params.id)
 
-        if(updateCrypto.isFavourite === true) {
-            const trueToFalse = await Crypto.update({
-                isFavourite: false
-            }, {
-                where: {
-                    id: updateCrypto.id
-                }
-            })
-            res.send({ message: 'Removed from favourites.'})
-            return;
-        } else {
-            const falseToTrue = await Crypto.update({
-                isFavourite: true
-            }, {
-                where: {
-                    id: updateCrypto.id
-                }
-            })
-            res.send({ message: 'Added to favourites.'})
-            return;
-        }
+// POST to add coin to favourites
+router.get('/:id', async (req, res) => {
+    try {
+        const userId = req.session.user_id
+        const cryptoId = req.params.id
+
+        // const ifUser = await User.findOne({
+        //     where: {
+        //         id: userId
+        //     },
+        //     attributes: ["id"]
+        // })
+
+        const addToFavourites = await Favourites.create({
+            user_id: userId,
+            coin_id: cryptoId
+        })
+
+        res.json(addToFavourites)
+    } catch(error) {
+        res.status(500).json(error)
+    }
+})
+
+
+// NEED TO USE SESSIONS USER AGAIN TO FIND USER ID AND THEN USE THE PARAMS ID FOR WHICH ONE TO GET DELETED
+//DELETE to remove from favourites
+router.get('/delete/:id', async (req, res) => {
+    try {
+        const userId = req.session.user_id
+        const cryptoId = req.params.id
+
+        const deleteFav = await Favourites.destroy({
+            where: {
+                coin_id: cryptoId
+            }
+        })
+
+        res.json(deleteFav)
     } catch(error) {
         res.status(500).json(error)
     }

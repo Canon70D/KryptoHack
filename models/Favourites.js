@@ -8,8 +8,11 @@ Favourites.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-    //   primaryKey: false,
-    //   autoIncrement: false,
+      // primaryKey: true,
+      references: {
+        model: "user",
+        key: "id",
+    },
     },
 
     coin_id: {

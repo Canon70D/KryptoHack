@@ -3,12 +3,17 @@ const Comment = require("./Comment");
 // const Crypto = require("./Crypto");
 // const UserCrypto = require("./UserCrypto");
 const CoinList = require("./CoinList")
-const Favorites = require("./Favorites")
+const Favourites = require("./Favourites")
 
 
 //user to comment associations
 User.hasMany(Comment, { foreignKey: "user_id", onDelete: "set null" });
 Comment.belongsTo(User, { foreignKey: "user_id", onDelete: "set null" });
+
+
+User.hasMany(Favourites, {foreignKey: "user_id", onDelete: "CASCADE"})
+Favourites.belongsTo(User, {foreignKey: "user_id"})
+
 
 //comment to crypto associations
 // Crypto.hasMany(Comment, { foreignKey: "crypto_id", onDelete: "set null" });
@@ -25,4 +30,4 @@ Comment.belongsTo(User, { foreignKey: "user_id", onDelete: "set null" });
 //   foreignKey: "crypto_id",
 // });
 
-module.exports = { User, Comment, CoinList, Favorites };
+module.exports = { User, Comment, CoinList, Favourites };

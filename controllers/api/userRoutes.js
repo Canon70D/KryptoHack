@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 router.get("/profile/:id", async (req, res) => {
   try {
     const userProfile = await User.findByPk(req.params.id);
-    const user = userProfile.map((project) => project.get({ plain: true }));
+    const user = userProfile.get({ plain: true });
 
     res.render("profile", user);
   } catch (error) {
@@ -97,6 +97,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Logout
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
