@@ -18,6 +18,8 @@ router.get('/coinList/:symbol', async (req, res) => {
     }
 });
 
+//Route for crypto list in ascending and descending order would need the api call and then use a map for logic to create thr order to then be put on screen
+
 // GET by name ASC
 // GET by name ASC
 router.get("/name/asc", async (req, res) => {

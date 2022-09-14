@@ -10,6 +10,11 @@ const Favourites = require("./Favourites")
 User.hasMany(Comment, { foreignKey: "user_id", onDelete: "set null" });
 Comment.belongsTo(User, { foreignKey: "user_id", onDelete: "set null" });
 
+
+User.hasMany(Favourites, {foreignKey: "user_id", onDelete: "CASCADE"})
+Favourites.belongsTo(User, {foreignKey: "user_id"})
+
+
 //comment to crypto associations
 // Crypto.hasMany(Comment, { foreignKey: "crypto_id", onDelete: "set null" });
 // Comment.belongsTo(Crypto, { foreignKey: "crypto_id", onDelete: "set null" });

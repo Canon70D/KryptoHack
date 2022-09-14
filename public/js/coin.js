@@ -46,4 +46,3 @@ const coinSingle = async (id) => {
 // document.querySelector('.coinTest').addEventListener('click', coinLatest);
 // document.querySelector('.coinTest').addEventListener('click', function () { coinSingle("ethereum") });
 
-
