@@ -12,9 +12,24 @@
     <div>1 week change: {{coinData.quote.USD.percent_change_7d}}<span class="btc-change-1w"></span></div>
   </div>
 
-  {{!-- <button type="button" class="btn btn-outline-success" id="refresh-btn">
-    Refresh data now
-  </button> --}}
+  {{!-- User can enter a new comment here --}}
+  <div class="commentInput">
+    <form>
+      <div class="form-group">
+        <textarea class="form-control status-box" rows="3" placeholder="Enter your comment here..."></textarea>
+      </div>
+    </form>
+    <div class="button-group pull-right">
+      <p class="counter">250</p>
+      <a href="#" class="btn btn-primary post" id="postCommentButton" onclick="postComments('{{userIDData}}','{{coinData.id}}')">Post</a>
+    </div>
+    <ul class="posts">
+      {{#each commentData as |data|}}
+      <li>By {{data.user_id}} : {{data.comment_text}}</li>
+      {{/each}}
+    </ul>
+  </div>
+
 </div>
 <footer>
 </footer>

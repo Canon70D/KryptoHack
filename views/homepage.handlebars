@@ -12,9 +12,12 @@
       {{#each coinData as |data|}}
       <tr class="gradeA">
         <td>
+          {{!-- {{#if data.id === "false"}} --}}
+          <button class="favouritesButton">♡</button>
+          {{!-- {{/if}} --}}
           <a href="/crptoProfile/{{data.id}}">{{data.name}}</a>
         </td>
-        <td>{{data.quote.USD.price}}</td>
+        <td>{{data.quote.USD.price}} </td>
         <td>{{data.quote.USD.volume_24h}}</td>
         <td>{{data.quote.USD.market_cap}}</td>
       </tr>

@@ -1,0 +1,17 @@
+[
+    {
+        "comment_text": "test comment",
+        "user_id": "1",
+        "coin_id": "1"
+    },
+    {
+        "comment_text": "test comment 2",
+        "user_id": "1",
+        "coin_id": "1"
+    },
+    {
+        "comment_text": "test comment 3",
+        "user_id": "1",
+        "coin_id": "1"
+    }
+]
