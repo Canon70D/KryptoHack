@@ -1,23 +1,59 @@
-// $('.message a').click(function(){
-//     $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-//  });
 
-// $(document).ready(function () {
-//   $(".datatable").dataTable({
-//     sPaginationType: "bs_four_button",
-//   });
-//   $(".datatable").each(function () {
-//     var datatable = $(this);
-//     // SEARCH - Add the placeholder for Search and Turn this into in-line form control
-//     var search_input = datatable
-//       .closest(".dataTables_wrapper")
-//       .find("div[id$=_filter] input");
-//     search_input.attr("placeholder", "Search");
-//     search_input.addClass("form-control input-sm");
-//     // LENGTH - Inline-Form control
-//     var length_sel = datatable
-//       .closest(".dataTables_wrapper")
-//       .find("div[id$=_length] select");
-//     length_sel.addClass("form-control input-sm");
-//   });
-// });
+// Post comments function
+async function postComments(userID, coinID) {
+    console.log(userID);
+    console.log(coinID);
+    let post = $('.status-box').val();
+    console.log(post);
+    await postCommentsAPI(userID, coinID, post);
+}
+
+// This section is for comments section where user adds comments and added comments gets recorded on the page.
+var main = async function (data) {
+    $('.btn.btn-primary.post').click(function () {
+        var post = $('.status-box').val();
+
+        $('<li>').text(post).prependTo('.posts');
+        $('.status-box').val('');
+        $('.counter').text('250');
+        $('.btn.btn-primary.post').addClass('disabled');
+    });
+    $('.status-box').keyup(function () {
+        var postLength = $(this).val().length;
+        var charactersLeft = 250 - postLength;
+        $('.counter').text(charactersLeft);
+        if (charactersLeft < 0) {
+            $('.btn.btn-primary.post').addClass('disabled');
+        } else if (charactersLeft === 250) {
+            $('.btn.btn-primary.post').addClass('disabled');
+        } else {
+            $('.btn.btn-primary.post').removeClass('disabled');
+        }
+    });
+}
+
+// To post the comments made by the user
+const postCommentsAPI = (userID, coinID, comment) => {
+    return new Promise(async function (resolve, reject) {
+
+        let responseAddComment = await fetch(`/api/comments/${userID}/${coinID}/${comment}`,
+            {
+                headers: { "Content-Type": "application/json; charset=utf-8" },
+                method: "POST",
+            });
+        let responseAddCommentJson = await responseAddComment.json();
+        let responseAddCommentStatus = responseAddComment.status;
+
+
+        if (responseAddCommentStatus === 201 || responseAddCommentStatus === 200 && !(responseAddCommentJson === undefined)) {
+            resolve(responseAddCommentJson);
+        } else {
+            reject(false);
+        }
+    });
+}
+
+
+$('.btn.btn-primary.post').addClass('disabled');
+$(document).ready(main)
+

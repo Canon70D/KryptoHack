@@ -1,7 +1,7 @@
 const router = require("express").Router();
 // Use axios to fetch data
 const axios = require('axios');
-const { Crypto, User } = require("../models");
+const { Crypto, User, Comment } = require("../models");
 const withAuth = require("../utils/auth");
 // Get only the latest coins and their data
 const coinAPIKey = "CMC_PRO_API_KEY=e3efea13-b74b-49bc-9eec-95f5d0473a69"
@@ -28,17 +28,31 @@ router.get("/", withAuth, async (req, res) => {
 
 // Single cryto profile
 router.get("/crptoProfile/:id", withAuth, async (req, res) => {
-    coinID = req.params.id
-    console.log(coinID);
+    let userIDData = req.session.user_id;
+    let coinID = req.params.id
+    
     const coinDetailedRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?id=${coinID}&${coinAPIKey}`;
-    console.log(coinDetailedRoute);
     try {
+
+        // Get all the coin details
         const response = await axios.get(coinDetailedRoute)
         let responseData = await response.data
         let coinData = (responseData.data)[coinID]
 
+        // Get all the comments made for this coin
+        const comment = await Comment.findAll({
+            where: {
+                coin_id: coinID
+            },
+            attributes: ['user_id', 'comment_text'],
+        });
+
+        const commentData = comment.map((project) => project.get({ plain: true }));
+        
         res.render("cryptoProfile", {
             coinData,
+            commentData,
+            userIDData,
             logged_in: req.session.logged_in,
         });
     } catch (err) {
