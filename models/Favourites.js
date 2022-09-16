@@ -18,6 +18,7 @@ Favourites.init(
     coin_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true
     },
   },
 
