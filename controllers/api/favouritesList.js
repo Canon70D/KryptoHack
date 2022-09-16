@@ -39,50 +39,56 @@ router.get('/', async (req, res) => {
     }
 })
 
-
-// POST to add coin to favourites
-router.get('/:id', async (req, res) => {
+// PUT route to check if coin id is in favourites and create it if isn't or delete if is to remove from favourites list
+router.put('/:id', async (req, res) => {
     try {
         const userId = req.session.user_id
-        const cryptoId = req.params.id
+        const coinId = req.params.id
+        console.log(coinId)
 
-        // const ifUser = await User.findOne({
-        //     where: {
-        //         id: userId
-        //     },
-        //     attributes: ["id"]
-        // })
+        const user = await User.findOne({
+            where: { id: userId },
+            attributes: ['id'],
+            include: [{ model: Favourites}]
+        });
 
-        const addToFavourites = await Favourites.create({
-            user_id: userId,
-            coin_id: cryptoId
-        })
+        let coinIds = user.favourites
+        // res.json(coinIds)
+        let coinInFav = 0;
+        let coinData;
 
-        res.json(addToFavourites)
-    } catch(error) {
-        res.status(500).json(error)
-    }
-})
-
-
-// NEED TO USE SESSIONS USER AGAIN TO FIND USER ID AND THEN USE THE PARAMS ID FOR WHICH ONE TO GET DELETED
-//DELETE to remove from favourites
-router.get('/delete/:id', async (req, res) => {
-    try {
-        const userId = req.session.user_id
-        const cryptoId = req.params.id
-
-        const deleteFav = await Favourites.destroy({
-            where: {
-                coin_id: cryptoId
+        for(let i = 0; i < coinIds.length; i++) {
+            coinData = coinIds[i].dataValues.coin_id
+            console.log(coinData)
+            if(coinData == coinId) {
+                coinInFav++
+                console.log("is a match")
+                // return;
+            } else {
+                console.log("NOT MATCH")
             }
-        })
+        }
 
-        res.json(deleteFav)
+        if(coinInFav === 1) {
+            // delete from the favourites
+            const deleteFav = await Favourites.destroy({
+                where: {
+                    coin_id: coinId
+                }
+            })
+            res.json("Does include")
+        } else {
+            // create and add to the favourites
+            const addToFavourites = await Favourites.create({
+                user_id: userId,
+                coin_id: coinId
+            })
+            res.json("Doesn't include")
+        }
+
     } catch(error) {
         res.status(500).json(error)
     }
 })
-
 
 module.exports = router;

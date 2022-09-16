@@ -1,4 +1,26 @@
 
+// Get buttons array
+const favBtns = document.querySelectorAll('.favouritesButton')
+
+// Add event listener to each button
+for(btn of favBtns) {
+    btn.addEventListener('click', e => {
+        let coinId = e.target.value
+        putTest(coinId)
+    })
+}
+
+// PUT to create and delete coin id into favourites
+const putTest = async (coinId) => {
+    const fetchTest = await fetch(`/api/favourites/${coinId}`,
+    {
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        method: "PUT",
+    })
+    const testRes = await fetchTest.json()
+    console.log(testRes)
+}
+
 // Post comments function
 async function postComments(userID, coinID) {
     console.log(userID);
