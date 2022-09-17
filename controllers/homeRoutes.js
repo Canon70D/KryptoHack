@@ -45,18 +45,27 @@ router.get("/crptoProfile/:id", withAuth, async (req, res) => {
       attributes: ["user_id", "comment_text"],
     });
 
-    const commentData = comment.map((project) => project.get({ plain: true }));
+        const commentData = comment.map((project) => project.get({ plain: true }));
 
-    res.render("cryptoProfile", {
-      coinData,
-      commentData,
-      userIDData,
-      logged_in: req.session.logged_in,
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+        // Get the username for each comment based on their user id
+        for(let i = 0; i < commentData.length; i++) {
+            let userNameById = commentData[i].user_id
+            const userNameCom = await User.findOne({ where: { id: userNameById } })
+            const usernameFromId = userNameCom.username
+            commentData[i].username = usernameFromId
+        }
+        
+        res.render("cryptoProfile", {
+            coinData,
+            commentData,
+            userIDData,
+            logged_in: req.session.logged_in,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+
 });
 
 // Single user profile

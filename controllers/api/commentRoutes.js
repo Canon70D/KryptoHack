@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
 
+
 // create an Put endpoint where user comment can get saved into the database
 // user needs to provide coin_id, user_id and comment fields as a request
 router.post('/:userID/:coinID/:comment', async (req, res) => {
