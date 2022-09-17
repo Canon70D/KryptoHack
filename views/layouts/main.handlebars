@@ -1,53 +1,65 @@
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css?family=Actor" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-  {{!-- Jquery --}}
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Actor"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap"
+      rel="stylesheet"
+    />
+    {{! Jquery }}
+    <script
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    ></script>
 
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  {{!
-  <link rel="stylesheet" href="/css/jass.css" /> }}
-  <link rel="stylesheet" href="/css/style.css" />
-  <title>CryptoHack</title>
-</head>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title>CryptoHack</title>
+  </head>
 
-<body>
-  <header class="display-flex justify-space-between align-center p-2">
-    <h2 class="title">
-      <span class="title-word title-word-1">KryptoHack</span>
-    </h2>
+  <body>
+    <header class="display-flex justify-space-between align-center p-2">
+      <h2 class="title">
+        <span class="title-word title-word-1">KryptoHack</span>
+      </h2>
+
+      {{#if logged_in}}
+        <nav>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/userProfile">Profile</a></li>
+            <li><a href="/api/favourites">Favourite</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a id="logout">logout</a></li>
+
+          </ul>
+        </nav>
+      {{/if}}
+    </header>
+
+    <main class="container container-fluid mt-5">
+      {{{body}}}
+    </main>
+    <footer>
+
+    </footer>
+
     {{#if logged_in}}
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/userProfile">Profile</a></li>
-        <li><a href="/api/favourites">Favourite</a></li>
-        <li><a href="#">Contact</a></li>
-        <button class="btn" id="logout">logout</button>
-      </ul>
-    </nav>
+      <script src="/js/logout.js"></script>
+      <script src="/js/script.js"></script>
     {{/if}}
-  </header>
 
-  <main class="container container-fluid mt-5">
-    {{{body}}}
-  </main>
-  <footer>
-
-  </footer>
-
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  <script src="/js/script.js"></script>
-  {{/if}}
-
-</body>
+  </body>
 
 </html>
