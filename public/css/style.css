@@ -189,21 +189,8 @@ ul li:hover a::after {
   transform: translateX(10%);
 }
 
-table.dataTable thead .sorting:after,
-table.dataTable thead .sorting:before,
-table.dataTable thead .sorting_asc:after,
-table.dataTable thead .sorting_asc:before,
-table.dataTable thead .sorting_asc_disabled:after,
-table.dataTable thead .sorting_asc_disabled:before,
-table.dataTable thead .sorting_desc:after,
-table.dataTable thead .sorting_desc:before,
-table.dataTable thead .sorting_desc_disabled:after,
-table.dataTable thead .sorting_desc_disabled:before {
-  bottom: 0.5em;
-}
-
 /* Start of the comments section on cryptoProfile page */
-.commentInput{
+.commentInput {
   margin-top: 30px;
 }
 
@@ -229,7 +216,7 @@ table.dataTable thead .sorting_desc_disabled:before {
   height: auto;
   margin: 20px 10px;
   padding: 5px;
-  background-color: #DADADA;
+  background-color: #dadada;
   border-radius: 3px;
   border: 5px solid #ccc;
 }
@@ -269,6 +256,94 @@ table.dataTable thead .sorting_desc_disabled:before {
   margin-bottom: 10px;
   word-wrap: break-word;
   min-height: 42px;
-  box-shadow:8px 8px 5px #888888;
+  box-shadow: 8px 8px 5px #888888;
 }
 /* End of the comments section on cryptoProfile page */
+
+/* profile page*/
+.card {
+  display: flex;
+  position: absolute;
+  width: 350px;
+  background-color: #efefef;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.image img {
+  transition: all 0.5s;
+}
+
+.card:hover .image img {
+  transform: scale(1.5);
+}
+
+/* .btn {
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+} */
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.idd {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.idd1 {
+  font-size: 12px;
+}
+
+.number {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.follow {
+  font-size: 12px;
+  font-weight: 500;
+  color: #444444;
+}
+
+/* .btn1 {
+  height: 0px;
+  width: 150px;
+  border: none;
+  background-color: #000;
+  color: #aeaeae;
+  font-size: 15px;
+} */
+
+.text span {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500;
+}
+
+.icons i {
+  font-size: 19px;
+}
+
+hr .new1 {
+  border: 1px solid;
+}
+
+.join {
+  font-size: 14px;
+  color: #a0a0a0;
+  font-weight: bold;
+}
+
+.date {
+  background-color: #ccc;
+}
+
+.container1 {
+  text-align: center;
+  position: relative;
+}
