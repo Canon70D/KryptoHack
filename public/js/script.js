@@ -1,4 +1,3 @@
-
 // Get buttons array
 const favBtns = document.querySelectorAll('.favouritesButton')
 
@@ -32,7 +31,7 @@ async function postComments(userID, coinID) {
 
 // This section is for comments section where user adds comments and added comments gets recorded on the page.
 var main = async function (data) {
-    $('.btn.btn-primary.post').click(function () {
+    $('.btn.btn-primary.post').click(async function() {
         var post = $('.status-box').val();
 
         $('<li>').text(post).prependTo('.posts');
