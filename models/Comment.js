@@ -1,8 +1,11 @@
+// Import models and sequelize connection
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+// Create Comment class model
 class Comment extends Model {}
 
+// Create properties for Comment model
 Comment.init(
   {
     id: {

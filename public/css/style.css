@@ -114,9 +114,11 @@
   display: block;
   clear: both;
 }
+
 .container .info {
   margin: 50px auto;
 }
+
 .container .info h1 {
   margin: 0 0 15px;
   padding: 0;
@@ -124,14 +126,17 @@
   font-weight: 300;
   color: #1a1a1a;
 }
+
 .container .info span {
   color: #4d4d4d;
   font-size: 12px;
 }
+
 .container .info span a {
   color: #000000;
   text-decoration: none;
 }
+
 .container .info span .fa {
   color: #ef3b3a;
 }
@@ -169,10 +174,12 @@ ul li a::before {
   left: 0;
   transition: 0.4s;
 }
+
 ul li:hover a::before {
   width: 50%;
   transform: translateX(90%);
 }
+
 ul li a::after {
   content: "";
   width: 10px;
@@ -184,6 +191,7 @@ ul li a::after {
   left: 0;
   transition: 0.4s;
 }
+
 ul li:hover a::after {
   width: 50%;
   transform: translateX(10%);
@@ -245,6 +253,7 @@ ul li:hover a::after {
   display: list-item;
   margin-top: 100px;
 }
+
 .posts li {
   background-color: #fff;
   border: 1.5px solid #d8d8d8;

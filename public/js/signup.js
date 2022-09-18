@@ -1,3 +1,4 @@
+// Function to sign up
 const signupFormHandler = async (event) => {
   event.preventDefault();
 
@@ -17,8 +18,7 @@ const signupFormHandler = async (event) => {
     } else {
       alert(response.statusText);
     }
-  }
-};
+}};
 
 document
   .querySelector(".signup-form")

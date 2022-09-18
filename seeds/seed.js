@@ -1,14 +1,10 @@
+// Import models, seeds and sequelize connection
 const sequelize = require("../config/connection");
-
-const { User, CoinList, Favourites, Comment } = require("../models");
+const { User, Comment } = require("../models");
 const userData = require("./userData.json");
-
-// const coinListData = require("./coinListData.json");
-// const cryptoData = require("./cryptoData.json");
 const commentData = require("./commentData.json");
 
-const userSeeds = require("./userSeeds");
-
+// Function that seeds the database
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
@@ -21,16 +17,6 @@ const seedDatabase = async () => {
     individualHooks: true,
     returning: true,
   });
-
-  // await CoinList.bulkCreate(coinListData, {
-  //   individualHooks: true,
-  //   returning: true,
-  // });
-
-  // await Crypto.bulkCreate(cryptoData, {
-  //   individualHooks: true,
-  //   returning: true,
-  // });
 
   process.exit(0);
 };
