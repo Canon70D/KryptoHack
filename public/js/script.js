@@ -1,24 +1,53 @@
 // Get buttons array
 const favBtns = document.querySelectorAll('.favouritesButton')
 
-// Add event listener to each button
-for(btn of favBtns) {
+// Add event listener to feach button
+for (btn of favBtns) {
     btn.addEventListener('click', e => {
         let coinId = e.target.value
         putTest(coinId)
+        setFavouriteButton()
     })
+}
+
+// This function sets the favourite button to red or default depending on if the values are in the fav list
+const setFavouriteButton = async () => {
+    const collection = document.getElementsByClassName("favouritesButton");
+    for (var i = 0; i < collection.length; ++i) {
+        // do something with items[i], which is a <li> element
+        let isFav = await getFavourites(collection[i].value)
+        if (isFav) {
+            collection[i].style.color = "red";
+        } else {
+            collection[i].style.color = "";
+        }
+    }
 }
 
 // PUT to create and delete coin id into favourites
 const putTest = async (coinId) => {
     const fetchTest = await fetch(`/api/favourites/${coinId}`,
-    {
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        method: "PUT",
-    })
+        {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            method: "PUT",
+        })
     const testRes = await fetchTest.json()
-    console.log(testRes)
+    return testRes;
+
 }
+
+// PUT to create and delete coin id into favourites
+const getFavourites = async (coinId) => {
+    let getFavStat = await fetch(`/api/favourites/isfavourite/${coinId}`,
+        {
+            headers: { "Content-Type": "application/json; charset=utf-8" },
+            method: "GET",
+        })
+    let favRes = await getFavStat.json()
+    return favRes
+}
+
+
 
 // Post comments function
 async function postComments(userID, coinID) {
@@ -30,8 +59,8 @@ async function postComments(userID, coinID) {
 }
 
 // This section is for comments section where user adds comments and added comments gets recorded on the page.
-var main = async function (data) {
-    $('.btn.btn-primary.post').click(async function() {
+var main = async function () {
+    $('.btn.btn-primary.post').click(async function () {
         var post = $('.status-box').val();
 
         $('<li>').text(post).prependTo('.posts');
@@ -77,4 +106,5 @@ const postCommentsAPI = (userID, coinID, comment) => {
 
 $('.btn.btn-primary.post').addClass('disabled');
 $(document).ready(main)
+$(document).ready(setFavouriteButton)
 

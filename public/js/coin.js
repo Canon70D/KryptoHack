@@ -1,6 +1,7 @@
 // API routes:
 // Get only the latest coins and their data
-const coinLatestRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=e3efea13-b74b-49bc-9eec-95f5d0473a69`;
+const coinAPIKey = process.env.APIKEY;
+const coinLatestRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=${coinAPIKey}`;
 // Get information for a single coin by providing its id
 const coinSingleRoute = `https://api.coingecko.com/api/v3/coins/`;
 

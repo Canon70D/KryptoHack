@@ -90,4 +90,46 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// Get route to check if coin id is in favourites
+router.get("/isfavourite/:id", async (req, res) => {
+  try {
+    const userId = req.session.user_id;
+    const coinId = req.params.id;
+    console.log(coinId);
+
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: ["id"],
+      include: [{ model: Favourites }],
+    });
+
+    let coinIds = user.favourites;
+    // res.json(coinIds)
+    let coinInFav = 0;
+    let coinData;
+
+    for (let i = 0; i < coinIds.length; i++) {
+      coinData = coinIds[i].dataValues.coin_id;
+      console.log(coinData);
+      if (coinData == coinId) {
+        coinInFav++;
+        console.log("is a match");
+        // return;
+      } else {
+        console.log("NOT MATCH");
+      }
+    }
+
+    if (coinInFav === 1) {
+      // This coin is in favourites
+      res.json(true);
+    } else {
+      // This coin is not in favourites
+      res.json(false);
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;
