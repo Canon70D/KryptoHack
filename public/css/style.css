@@ -356,3 +356,11 @@ hr .new1 {
   text-align: center;
   position: relative;
 }
+
+.contact{
+  margin: 20px;
+}
+
+#logout{
+  cursor: pointer;
+}
