@@ -29,24 +29,26 @@
   </head>
 
   <body>
-    <header class="display-flex justify-space-between align-center p-2">
+    {{!-- <header class="display-flex justify-space-between align-center p-2">
       <h2 class="title">
         <span class="title-word title-word-1">KryptoHack</span>
-      </h2>
+      </h2> --}}
+
+<header>
+  <h1 data-text="KRYPTOHACK">KRYPTOHACK</h1>
+</header>
 
       {{#if logged_in}}
         <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/userProfile">Profile</a></li>
-            <li><a href="/api/favourites">Favourite</a></li>
-            <li><a href="/contact">Contact</a></li>
-            <li><a id="logout">logout</a></li>
-
-          </ul>
+            <a href="/">Home</a>
+            <a href="/userProfile">Profile</a>
+            <a href="/api/favourites">Favourite</a>
+            <a href="/contact">Contact</a>
+            <a id="logout">Logout</a>
+            <div class="animation start-home"></div>
         </nav>
       {{/if}}
-    </header>
+    {{!-- </header> --}}
 
     <main class="container container-fluid mt-5">
       {{{body}}}
