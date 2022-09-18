@@ -1,3 +1,4 @@
+// Login function
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
@@ -16,8 +17,7 @@ const loginFormHandler = async (event) => {
     } else {
       alert('Failed to log in');
     }
-  }
-};
+}};
 
 document
   .querySelector('.login-form')

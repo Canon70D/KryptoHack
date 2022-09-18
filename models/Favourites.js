@@ -1,8 +1,11 @@
+// Import models and sequelize connection
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+// Create Favourites class model
 class Favourites extends Model {}
 
+// Create properties for Favourites model
 Favourites.init(
   {
     user_id: {

@@ -1,3 +1,4 @@
+// Import packages and models
 const router = require("express").Router();
 // Use axios to fetch data
 const axios = require("axios");
@@ -7,13 +8,12 @@ const withAuth = require("../utils/auth");
 const coinAPIKey = process.env.APIKEY;
 const coinLatestRoute = `https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=${coinAPIKey}`;
 
+// GET route for the homepage with coin data through API
 router.get("/", withAuth, async (req, res) => {
   try {
     const response = await axios.get(coinLatestRoute);
     let responseData = await response.data;
     let coinData = responseData.data;
-
-    // const cryptos = coinData.map((project) => project.get({ plain: true }));
 
     res.render("homepage", {
       coinData,
@@ -25,7 +25,7 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
-// Single cryto profile
+// GET single cryto from API and render their profile with comments
 router.get("/crptoProfile/:id", withAuth, async (req, res) => {
   let userIDData = req.session.user_id;
   let coinID = req.params.id;
@@ -49,11 +49,11 @@ router.get("/crptoProfile/:id", withAuth, async (req, res) => {
 
         // Get the username for each comment based on their user id
         for(let i = 0; i < commentData.length; i++) {
-            let userNameById = commentData[i].user_id
-            const userNameCom = await User.findOne({ where: { id: userNameById } })
-            const usernameFromId = userNameCom.username
-            commentData[i].username = usernameFromId
-        }
+            let userNameById = commentData[i].user_id;
+            const userNameCom = await User.findOne({ where: { id: userNameById } });
+            const usernameFromId = userNameCom.username;
+            commentData[i].username = usernameFromId;
+        };
         
         res.render("cryptoProfile", {
             coinData,
@@ -65,10 +65,9 @@ router.get("/crptoProfile/:id", withAuth, async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-
 });
 
-// Single user profile
+// GET for a single user info and render profile
 router.get("/userProfile", withAuth, async (req, res) => {
   try {
     const userID = req.session.user_id;
@@ -89,7 +88,7 @@ router.get("/userProfile", withAuth, async (req, res) => {
   }
 });
 
-// Go to contact page
+// GET to render the contact page
 router.get("/contact", async (req, res) => {
   try {
     res.render("contact", {
@@ -100,12 +99,12 @@ router.get("/contact", async (req, res) => {
   }
 });
 
+// GET route that checks if user logged in
 router.get("/login", (req, res) => {
   if (req.session.logged_in) {
     res.redirect("/");
     return;
   }
-
   res.render("login");
 });
 

@@ -1,6 +1,6 @@
+// Import
 const router = require('express').Router();
-const { Crypto, CoinList } = require('../../models');
-
+const { CoinList } = require('../../models');
 
 // GET ID from coinList
 router.get('/coinList/:symbol', async (req, res) => {
@@ -17,6 +17,5 @@ router.get('/coinList/:symbol', async (req, res) => {
         res.status(500).json(err);
     }
 });
-
 
 module.exports = router;

@@ -1,8 +1,11 @@
+// Import models and sequelize connection
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
+// Create CoinList class model
 class CoinList extends Model {}
 
+// Create properties for CoinList model
 CoinList.init(
   {
     id: {

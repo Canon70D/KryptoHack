@@ -1,6 +1,8 @@
+// Import
 const router = require("express").Router();
 const { User } = require("../../models");
 
+// GET all users
 router.get("/", async (req, res) => {
   try {
     const userData = await User.findAll();
@@ -11,7 +13,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ADD IN A GET SINGULAR USER ACCOUNT FOR THE PROFILE AND RENDER THE PROFILE PAGE
+// GET single user id and render profile page for user
 router.get("/profile/:id", async (req, res) => {
   try {
     const userProfile = await User.findByPk(req.params.id);
@@ -23,7 +25,7 @@ router.get("/profile/:id", async (req, res) => {
   }
 });
 
-// Get to signup page
+// GET to signup page
 router.get("/signup", async (req, res) => {
   try {
     res.render("signup");
@@ -32,7 +34,7 @@ router.get("/signup", async (req, res) => {
   }
 });
 
-// Account creation
+// POST to create account and redirect back to login page
 router.post("/signup", async (req, res) => {
   try {
     const newUser = await User.create({
@@ -46,7 +48,7 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-// Account deletion
+// DELETE user account
 router.delete("/:id", async (req, res) => {
   try {
     const deleteData = await User.destroy({
@@ -66,6 +68,7 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// POST to check login and password that user entered for database
 router.post("/login", async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
@@ -97,7 +100,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// Logout
+// POST to logout
 router.post("/logout", (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {

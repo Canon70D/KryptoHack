@@ -1,3 +1,4 @@
+// Import packages and mdoels
 const router = require("express").Router();
 const { User, Favourites } = require("../../models");
 const axios = require("axios");
@@ -33,7 +34,7 @@ router.get("/", async (req, res) => {
       coinData,
       logged_in: req.session.logged_in,
     });
-    // res.json(coinData)
+
   } catch (error) {
     res.status(500).json(error);
   }
@@ -44,7 +45,6 @@ router.put("/:id", async (req, res) => {
   try {
     const userId = req.session.user_id;
     const coinId = req.params.id;
-    console.log(coinId);
 
     const user = await User.findOne({
       where: { id: userId },
@@ -53,7 +53,6 @@ router.put("/:id", async (req, res) => {
     });
 
     let coinIds = user.favourites;
-    // res.json(coinIds)
     let coinInFav = 0;
     let coinData;
 
@@ -62,12 +61,11 @@ router.put("/:id", async (req, res) => {
       console.log(coinData);
       if (coinData == coinId) {
         coinInFav++;
-        console.log("is a match");
-        // return;
+        console.log("Is a match");
       } else {
-        console.log("NOT MATCH");
+        console.log("Not a match");
       }
-    }
+    };
 
     if (coinInFav === 1) {
       // delete from the favourites
