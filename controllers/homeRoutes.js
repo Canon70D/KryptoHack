@@ -92,7 +92,9 @@ router.get("/userProfile", withAuth, async (req, res) => {
 // Go to contact page
 router.get("/contact", async (req, res) => {
   try {
-    res.render("contact");
+    res.render("contact", {
+    logged_in: req.session.logged_in,
+    });
   } catch (error) {
     res.status(500).json(error);
   }
