@@ -1,13 +1,16 @@
+// Import models, bcrypto package and sequelize connection
 const { Model, DataTypes } = require("sequelize");
 const bcrypt = require("bcrypt");
 const sequelize = require("../config/connection");
 
+// Create User class model with a check password method
 class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
 }
 
+// Create properties and hooks for User model
 User.init(
   {
     id: {
