@@ -5,23 +5,41 @@ const favBtns = document.querySelectorAll('.favouritesButton')
 for (btn of favBtns) {
     btn.addEventListener('click', e => {
         let coinId = e.target.value
-        putTest(coinId)
-        setFavouriteButton()
+        let element = e.target
+
+
+        setFavouriteButton(element);
+        // putTest(coinId);
     })
 }
 
 // This function sets the favourite button to red or default depending on if the values are in the fav list
-const setFavouriteButton = async () => {
-    const collection = document.getElementsByClassName("favouritesButton");
-    for (var i = 0; i < collection.length; ++i) {
-        // do something with items[i], which is a <li> element
-        let isFav = await getFavourites(collection[i].value)
+async function setFavouriteButton(favElement) {
+    // For individual element
+    if (favElement != undefined) {
+        var coinValue = favElement.value
+        let isFav = await getFavourites(coinValue);
         if (isFav) {
-            collection[i].style.color = "red";
+            favElement.style.color = "";
         } else {
-            collection[i].style.color = "";
+            favElement.style.color = "red";
+        }
+        putTest(coinValue);
+
+    } else {
+        const collection = document.getElementsByClassName("favouritesButton");
+        for (var i = 0; i < collection.length; ++i) {
+            // do something with items[i], which is a <li> element
+            let isFav = await getFavourites(collection[i].value)
+            if (isFav) {
+                collection[i].style.color = "red";
+            } else {
+                collection[i].style.color = "";
+            }
         }
     }
+
+
 }
 
 // PUT to create and delete coin id into favourites
@@ -48,13 +66,9 @@ const getFavourites = async (coinId) => {
 }
 
 
-
 // Post comments function
 async function postComments(userID, coinID) {
-    console.log(userID);
-    console.log(coinID);
     let post = $('.status-box').val();
-    console.log(post);
     await postCommentsAPI(userID, coinID, post);
 }
 
@@ -105,6 +119,10 @@ const postCommentsAPI = (userID, coinID, comment) => {
 
 
 $('.btn.btn-primary.post').addClass('disabled');
-$(document).ready(main)
-$(document).ready(setFavouriteButton)
+// $(document).ready(main)
+document.addEventListener("DOMContentLoaded", function () {
+    main();
+    setFavouriteButton();
+});
+// $(document).ready(setFavouriteButton)
 
